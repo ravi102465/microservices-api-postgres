@@ -1,0 +1,21 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: flyway-migrations
+spec:
+  template:
+    spec:
+      containers:
+      - name: flyway-migrations
+        image: ravi102465/flyway-migrations
+        imagePullPolicy: Always
+        command: ["./flyway",
+                  "-url=jdbc:postgresql://postgresdb:5432/testDB",
+                  "-user=testUser",
+                  "-password=<password>",
+                  "migrate"]
+
+      restartPolicy: Never
+  backoffLimit: 0
+
+

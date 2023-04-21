@@ -1,0 +1,14 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: film-integration-cm
+  labels:
+    app: film-integration
+    service: film-integration
+data:
+  ASPNETCORE_ENVIRONMENT: Development
+  ASPNETCORE_URLS: http://0.0.0.0:80
+  CheckUpdateTime: "30000"
+  ConnectionStrings__FilmDBCOntextConnection: Host=postgresql-svc.postgresql-ns;Database=testDB;Username=testUser;Password=<Password>
+  ConnectionStrings__BlobStorageConnectionString: "DefaultEndpointsProtocol=https;AccountName=<storageaccount>;AccountKey=<accessKey>;EndpointSuffix=core.windows.net"
+  PORT: "80"

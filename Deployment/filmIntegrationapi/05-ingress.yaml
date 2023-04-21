@@ -1,0 +1,22 @@
+kind: Ingress
+apiVersion: networking.k8s.io/v1
+metadata:
+  name: film-integration
+  labels:
+    app: film-integration
+    service: film-integration
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
+    kubernetes.io/ingress.class: "nginx"
+spec:
+  rules:
+    - http:
+        paths:
+        - path: /film-api(/|$)(.*)
+          pathType: Prefix
+          backend:
+            service:
+              name: film-integration
+              port:
+                number: 80
